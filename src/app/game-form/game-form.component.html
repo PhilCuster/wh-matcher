@@ -1,0 +1,41 @@
+<div *ngIf="!formOptions">
+    <mat-spinner></mat-spinner>
+</div>
+<div *ngIf="formOptions" class="game-form">
+    <div class="form-header">Enter the details of the game you would like to play below.  Once we have found a match for you, we will message you both on Discord.</div>
+    <form [formGroup]="gameForm" fxLayout="column" (ngSubmit)="submitGameRequest()">
+        <div fxLayout="row" class="question-row">
+            Which game do you want to play?
+        </div>
+        <div fxLayout="row" class="game-form-row">
+            <mat-radio-group formControlName="game">
+                <mat-radio-button class="game-form-option" *ngFor="let game of formOptions.game" id="{{game}}" [value]="game" type="radio"
+                    name="game">
+                    {{game}}
+                </mat-radio-button>
+            </mat-radio-group>
+        </div>
+        <div fxLayout="row" class="question-row">
+            What point values are you open to?
+        </div>
+        <div fxLayout="row" class="game-form-row">
+            <mat-checkbox class="game-form-option" *ngFor="let points of formOptions.points" (change)="onPointsChange(points, $event.checked)">
+                {{points}}
+            </mat-checkbox>
+        </div>
+        <div fxLayout="row" class="question-row">
+            What level of play are you looking for?
+        </div>
+        <div fxLayout="row" class="game-form-row">
+            <mat-radio-group formControlName="level">
+                <mat-radio-button class="game-form-option" *ngFor="let level of formOptions.level" id="{{level}}" [value]="level" type="radio"
+                    name="level">
+                    {{level}}
+                </mat-radio-button>
+            </mat-radio-group>
+        </div>
+        <div fxLayout="row" class="game-form-row">
+            <button mat-flat-button color="primary" type="submit" [disabled]="!gameForm.valid">Submit</button>
+        </div>
+    </form>
+</div>
