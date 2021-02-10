@@ -1,0 +1,40 @@
+<div *ngIf="loading" class="loading-screen">
+    <app-loading-spinner></app-loading-spinner>
+</div>
+<div>
+    <table mat-table [dataSource]="games">
+        <ng-container matColumnDef="creator">
+            <th mat-header-cell *matHeaderCellDef> User ID </th>
+            <td mat-cell *matCellDef="let game"> {{game.creator.id}} </td>
+        </ng-container>
+        <ng-container matColumnDef="game">
+            <th mat-header-cell *matHeaderCellDef> Game </th>
+            <td mat-cell *matCellDef="let game"> {{game.game}} </td>
+        </ng-container>
+        <ng-container matColumnDef="level">
+            <th mat-header-cell *matHeaderCellDef> Level </th>
+            <td mat-cell *matCellDef="let game"> {{game.level}} </td>
+        </ng-container>
+        <ng-container matColumnDef="points">
+            <th mat-header-cell *matHeaderCellDef> Points </th>
+            <td mat-cell *matCellDef="let game"> {{game.displayPoints}} </td>
+        </ng-container>
+        <ng-container matColumnDef="accept">
+            <th mat-header-cell *matHeaderCellDef> </th>
+            <td mat-cell *matCellDef="let row">
+                <button mat-flat-button color="primary">Accept</button>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <!--<div *ngFor="let game of games" fxLayout="row" class="game-entry">
+        <div class="game-property game-author">User: {{game.creator.id}}</div>
+        <div class="game-property game-game">Game: {{game.game}}</div>
+        <div class="game-property game-points" fxLayout="row">Points:
+            <div *ngFor="let p of game.points; index as i">{{p}}<span *ngIf="i < game.points.length-1">,</span></div>
+        </div>
+        <div class="game-property game-level">Level: {{game.level}}</div>
+    </div>
+-->
+</div>
